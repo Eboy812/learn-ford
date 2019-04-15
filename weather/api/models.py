@@ -8,6 +8,12 @@ class Temperature(models.Model):
     change = models.FloatField(default=0.0)
     recorded_time = models.DateTimeField(auto_now=True)
     
+    @property
+    def fahrenheit(self):
+        "Returns the temperature in fahrenheit"
+        return '%f' % ((self.celsius * 9/5) +32)
+
+    
     def __str__(self):
         return str(self.celsius)
         
@@ -22,3 +28,5 @@ class Pressure(models.Model):
 
 class Humidity(models.Model):
     pass
+
+
