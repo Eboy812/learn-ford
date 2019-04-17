@@ -24,9 +24,16 @@ class Pressure(models.Model):
         
     def __str__(self):
         return str(self.pressure)
-
-
+    
 class Humidity(models.Model):
-    pass
+    rh = models.FloatField(default=0.0)
+    change = models.FloatField(default=0.0)
+    recorded_time = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return str(self.rh)
+
+
+
 
 
