@@ -26,13 +26,14 @@ body {
         </div>
         <div class="col-md-5 text-center border border-primary text-danger"><u>Humidity</u>
             <h1></h1>
-            <h1>{{ RH.rh|floatformat:1 }}</h1>
+            <h1>{{ RH.rh|floatformat:1 }}%</h1>
             <h5>[7 Day Graph Of Humidity]</h5>
             <h6># of times Humid. Measured</h6>
         </div>
         <div class="col-md-5 text-center border border-primary text-primary"><u>Time</u>
-            <h1>2:50 P.M.</h1>
-            <h5>Central Standard Time</h5>
+            <h1>{% now "h:m" %}</h1>
+            <h1>{{default_time_value|time:"P"}}</h1>
+            <h5>Chicago Time Zone</h5>
         </div>
         <div class="col-md-5 text-center border border-primary text-warning"><u>Air Pressure</u>
             <h1></h1>
