@@ -25,8 +25,8 @@ body {
             <h6># of times Temp. Measured</h6>
         </div>
         <div class="col-md-5 text-center border border-primary text-danger"><u>Humidity</u>
-            <h1>73%</h1>
-            <h1>{{ RH|floatformat:1 }}</h1>
+            <h1></h1>
+            <h1>{{ RH.rh|floatformat:1 }}</h1>
             <h5>[7 Day Graph Of Humidity]</h5>
             <h6># of times Humid. Measured</h6>
         </div>
@@ -35,8 +35,8 @@ body {
             <h5>Central Standard Time</h5>
         </div>
         <div class="col-md-5 text-center border border-primary text-warning"><u>Air Pressure</u>
-            <h1>Medium-High</h1>
-            <h1>{{ BH|floatformat:1 }}</h1>
+            <h1></h1>
+            <h1>{{ BH.pressure|floatformat:1 }}</h1>
         </div>
     </div>
 </div>
