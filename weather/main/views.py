@@ -3,6 +3,7 @@ from api.models import Temperature, Humidity, Pressure
 
 
 
+
 def home(request):
     # Find the newest single temperature
     temp = Temperature.objects.order_by('-recorded_time').first()
@@ -29,6 +30,7 @@ def home(request):
          'BP': pressure,
          'pcount': pcount,
          'pfirst': pfirst.recorded_time,
+         'result_count': tcount + hcount + pcount
          
     }
     )
