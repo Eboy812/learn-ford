@@ -14,10 +14,10 @@ class LineChartView(BaseLineChartView):
     def set_minmax(self, index, item):
     
         if item > self.max_list[index]:
-            self.max_list[index] = item
+            self.max_list[index] = c2f(item)
             
         if item < self.min_list[index]:
-            self.min_list[index] = item
+            self.min_list[index] = c2f(item)
     
     def last_seven_days(self):
         now = datetime.now()
