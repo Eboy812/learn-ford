@@ -16,7 +16,7 @@ class LineChartView(BaseLineChartView):
         if item > self.max_list[index]:
             self.max_list[index] = item
             
-        if item > self.min_list[index]:
+        if item < self.min_list[index]:
             self.min_list[index] = item
     
     def last_seven_days(self):
