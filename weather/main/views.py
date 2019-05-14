@@ -42,8 +42,6 @@ class LineChartView(BaseLineChartView):
             idx = self.labels.index(days[weekday])
             self.set_minmax(idx, data.value)
 
-
-        self.labels.append(days[weekday])    
     
     def get_providers(self):
         """ Return the names for the data sets. """
