@@ -21,14 +21,12 @@ body {
         <div class="row">
         <div class="col-md-5 text-center border border-primary text-secondary"><u>Temperature</u> 
             <h1><p class="weather-item">{{ temp.fahrenheit|floatformat:1 }}&deg;F <span class="weather-sub">{{ temp.celsius|floatformat:1 }}&deg;C</span></p></h1>
-            <h5>[7 Day Graph Of Tempurature]</h5>
             <h6>Found {{ tcount }} results.</h6>
             <h6>L{{temp_min|floatformat:1}}/H{{temp_max|floatformat:1}}</h6>
         </div>
         <div class="col-md-5 text-center border border-primary text-danger"><u>Humidity</u>
             <h1></h1>
             <h1>{{ RH.rh|floatformat:1 }}%</h1>
-            <h5>[7 Day Graph Of Humidity]</h5>
             <h6>Found {{ hcount }} results.</h6>
             <h6>L{{RH_min|floatformat:1}}/H{{RH_max|floatformat:1}}</h6>
         </div>
@@ -41,10 +39,78 @@ body {
             <h1>{{ BP.pressure|floatformat:1 }}mb</h1>
             <h6>Found {{ pcount }} results.</h6>
             <h6>L{{BP_min|floatformat:1}}/H{{BP_max|floatformat:1}}</h6>
+        
         </div>
     </div>
 </div>
 </div>
+  <div id="graphs" class="container graphs">
+        <div class="row"> <!-- this horizontal row will hold our weather display -->
+            <div class="col-md-4"> <!-- block 1 (left) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="tempChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/temp', function(data) {
+                var ctx = $("#tempChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+            <div class="col-md-4"> <!-- block 2 (middle) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="rhChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/RH', function(data) {
+                var ctx = $("#rhChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+            <div class="col-md-4"> <!-- block 3 (right) -->
+                <div class="weather-block rounded">
+                    
+        <canvas id="bpChart" width="500" height="400"></canvas>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script type="text/javascript">
+            $.get('/chart/BH', function(data) {
+                var ctx = $("#bpChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            });
+        </script>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <div class="row">
  <img src="https://wallpapercave.com/wp/ChtHiPv.jpg" alt="Tropical Beach" class="img">
