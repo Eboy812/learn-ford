@@ -77,10 +77,10 @@ def home(request):
     sometime_ago = now - timedelta(days = 7)
     temp_max = c2f(Temperature.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Max('celsius'))['celsius__max'])
     temp_min = c2f(Temperature.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Min('celsius'))['celsius__min'])
-    RH_max = c2f(Humidity.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Max('rh'))['rh__max'])
-    RH_min = c2f(Humidity.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Min('rh'))['rh__min'])
-    BP_max = c2f(Pressure.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Max('pressure'))['pressure__max'])
-    BP_min = c2f(Pressure.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Min('pressure'))['pressure__min'])
+    RH_max = (Humidity.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Max('rh'))['rh__max'])
+    RH_min = (Humidity.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Min('rh'))['rh__min'])
+    BP_max = (Pressure.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Max('pressure'))['pressure__max'])
+    BP_min = (Pressure.objects.filter(recorded_time__range=(sometime_ago,now)).aggregate(Min('pressure'))['pressure__min'])
     # Find the newest single temperature
     temp = Temperature.objects.order_by('-recorded_time').first()
     # Gather the total number of temperature readings gathered.
