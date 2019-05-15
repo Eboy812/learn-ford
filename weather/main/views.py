@@ -7,24 +7,33 @@ from chartjs.views.lines import BaseLineChartView
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 class LineChartView(BaseLineChartView):
+    type = ''
     labels = []
     max_list = []
     min_list = []
     
     def set_minmax(self, index, item):
+        
+        if self.type == 'temp':
+            item = c2f(item)
     
         if item > self.max_list[index]:
-            self.max_list[index] = c2f(item)
+            self.max_list[index] = (item)
             
         if item < self.min_list[index]:
-            self.min_list[index] = c2f(item)
+            self.min_list[index] = (item)
     
     def last_seven_days(self):
+        self.type = self.kwargs.get('type')
         now = datetime.now()
         seven_days_ago = now - timedelta(days = 7)
         
-        
-        datas = Temperature.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('celsius'))
+        if self.type == 'RH':
+            datas = Humidity.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('rh'))
+        elif self.type == 'BP':
+            datas = Pressure.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('pressure'))
+        else:
+            datas = Temperature.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('celsius'))
         
 
     
