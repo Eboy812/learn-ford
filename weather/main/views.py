@@ -30,12 +30,12 @@ class LineChartView(BaseLineChartView):
         
         if self.type == 'RH':
             datas = Humidity.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('rh'))
-        elif self.type == 'BP':
+        elif self.type == 'BH':
             datas = Pressure.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('pressure'))
         else:
             datas = Temperature.objects.order_by('-recorded_time').filter(recorded_time__range=(seven_days_ago,now)).annotate(value=F('celsius'))
         
-
+        print(datas)
     
         for data in datas:
             weekday = datetime.weekday(data.recorded_time)
